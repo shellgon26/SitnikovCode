@@ -22,10 +22,9 @@ e=0.9
 Plotzvtgraph=False
 
 #if you want to see the phase space line, set this to true
-Plotphasespacegraph=False
-
+Plotphasespacegraph=True
 #if you want to see the Poincaré section points, set this to true
-Plotpoincaresection=True
+Plotpoincaresection=False
 
 #Please ensure tmax is an integer
 #tmx is the maximum time to calculate values for (divided by 2pi)
@@ -34,6 +33,7 @@ tmax=1000
 pointsperhalfcycle=100
 
 #Animates the phase space diagram
+#NOTE: Do not try to close the graph while it is still animating, it will spawn a blank graph in its place, in this case you'll have to close your python to fix it
 Animated = True
 
 def odes(x,tval):
