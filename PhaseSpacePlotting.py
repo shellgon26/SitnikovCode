@@ -5,6 +5,34 @@ import matplotlib.pyplot as plt
 import math
 #comment time BABY
 
+
+#initial value for z
+z0=0
+
+#initial value for v
+v0=1.915
+
+#initial value for A
+A0=0
+
+#defines the eccentricity of plane orbits
+e=0.2
+
+#if you want to see how z and v vary with time, set this to true
+Plotzvtgraph=False
+
+#if you want to see the phase space line, set this to true
+Plotphasespacegraph=False
+
+#if you want to see the Poincaré section points, set this to true
+Plotpoincaresection=True
+
+#Please ensure tmax is an integer
+#tmx is the maximum time to calculate values for (divided by 2pi)
+tmax=1000
+#defines how many points to plot per pi
+pointsperhalfcycle=100
+
 def odes(x,tval):
     #reads in initial values for ode
     z=x[0]
@@ -23,26 +51,15 @@ def odes(x,tval):
     result =[dz,dv,dA]
     return result
 
-#initial value for z
-z0=0
 
-#initial value for v
-v0=1.91705
-
-#initial value for A
-A0=0
 
 #combines initial values into list to be given to odeint function
 x0=[z0,v0,A0]
 
 #creates a list of ts to evaluate the ODEs at
-#Please ensure tmax is an integer
-tmax=100
-pointsperhalfcycle=100
 ts=np.linspace(0,2*tmax*math.pi,2*tmax*pointsperhalfcycle+1)
 
-#defines the eccentricity of plane orbits
-e=0.0
+
 
 #gets the numerical solutions to the ODEs given the inital values
 #values at all the times within ts
@@ -56,32 +73,36 @@ for i in range(-1,2*pointsperhalfcycle*tmax,int(2*pointsperhalfcycle)):
         checkvals.append(0)
     else:
         checkvals.append(i)
-#print(checkvals)
 
-# #plots z and v on the same axis
-plt.plot(ts,x[:,0])
-plt.plot(ts,x[:,1])
-plt.plot(ts[checkvals],x[:,0][checkvals],"bx")
+if Plotzvtgraph:
+    # #plots z and v on the same axis
+    plt.plot(ts,x[:,0])
+    plt.plot(ts,x[:,1])
+    plt.plot(ts[checkvals],x[:,0][checkvals],"bx")
 
-#testing code
-# plt.plot(ts,np.sin(ts))
-# plt.plot(ts[checkvals],np.sin(ts)[checkvals],"bx")
+    #testing code
+    # plt.plot(ts,np.sin(ts))
+    # plt.plot(ts[checkvals],np.sin(ts)[checkvals],"bx")
 
-#plot labels
-plt.xlabel("time (s)")
-plt.ylabel("z")
+    #plot labels
+    plt.xlabel("time (s)")
+    plt.ylabel("z")
 
-#display first plot
-plt.show()
+    #display first plot
+    plt.show()
 
-#plots phase space
-plt.plot(x[:,0],x[:,1],"b",linewidth=0.5)
+if Plotphasespacegraph:
+    #plots phase space
+    plt.plot(x[:,0],x[:,1],"b",linewidth=0.5)
 
-#plots poincare section
-plt.plot(x[:,0][checkvals],x[:,1][checkvals],"b.")
 
-plt.xlabel("z")
-plt.ylabel("v")
+if Plotpoincaresection:
+    #plots poincare section
+    plt.plot(x[:,0][checkvals],x[:,1][checkvals],"b.")
 
-#display 2nd graph
-plt.show()
+if Plotphasespacegraph | Plotpoincaresection:
+    plt.xlabel("z")
+    plt.ylabel("v")
+
+    #display 2nd graph
+    plt.show()
