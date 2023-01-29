@@ -21,7 +21,7 @@ e=0
 #if you want to see how z and v vary with time, set this to true
 #If you want this graph, I reccomend setting tmax to a single digit number, else
 #the x axis becomes unreadable due to the results being squished together
-Plotzvtgraph=True
+Plotzvtgraph=False
 
 #if you want to see the phase space line, set this to true
 Plotphasespacegraph=False
@@ -30,7 +30,7 @@ Plotpoincaresection=False
 
 #Please ensure tmax is an integer
 #tmx is the maximum time to calculate values for (divided by 2pi)
-tmax=10
+tmax=1000
 #defines how many points to plot per pi
 pointsperhalfcycle=100
 
