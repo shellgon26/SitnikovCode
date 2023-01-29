@@ -10,25 +10,25 @@ import math
 z0=0
 
 #initial value for v
-v0=1.915
+v0=1
 
 #initial value for A
 A0=0
 
 #defines the eccentricity of plane orbits
-e=0.9
+e=0
 
 #if you want to see how z and v vary with time, set this to true
 Plotzvtgraph=False
 
 #if you want to see the phase space line, set this to true
-Plotphasespacegraph=True
+Plotphasespacegraph=False
 #if you want to see the Poincaré section points, set this to true
 Plotpoincaresection=False
 
 #Please ensure tmax is an integer
 #tmx is the maximum time to calculate values for (divided by 2pi)
-tmax=1000
+tmax=100
 #defines how many points to plot per pi
 pointsperhalfcycle=100
 
@@ -73,14 +73,13 @@ for i in range(-1,2*pointsperhalfcycle*tmax,int(2*pointsperhalfcycle)):
 
 if Plotzvtgraph:
     # #plots z and v on the same axis
-    plt.plot(ts,x[:,0])
-    plt.plot(ts,x[:,1])
+    plt.plot(ts,x[:,0],label="z")
+    plt.plot(ts,x[:,1],label="v")
     plt.plot(ts[checkvals],x[:,0][checkvals],"bx")
 
     #plot labels
     plt.xlabel("time (s)")
-    plt.ylabel("z")
-
+    plt.legend()
     #display first plot
     plt.show()
 
