@@ -27,7 +27,7 @@ def odes(x,tval):
 z0=0
 
 #initial value for v
-v0=1.91705
+v0=0.5
 
 #initial value for A
 A0=0
@@ -37,16 +37,16 @@ x0=[z0,v0,A0]
 
 #creates a list of ts to evaluate the ODEs at
 #Please ensure tmax is an integer
-tmax=100
+tmax=1000
 pointsperhalfcycle=100
-ts=np.linspace(0,2*tmax*math.pi,2*tmax*pointsperhalfcycle+1)
-
+ts=np.linspace(0,2*tmax,2*tmax*pointsperhalfcycle+1)
+print(ts)
 #defines the eccentricity of plane orbits
-e=0.0
+e=0.2
 
 #gets the numerical solutions to the ODEs given the inital values
 #values at all the times within ts
-x=odeint(odes,x0,ts)
+x=odeint(odes,x0,ts*math.pi)
 
 
 
@@ -59,9 +59,10 @@ for i in range(-1,2*pointsperhalfcycle*tmax,int(2*pointsperhalfcycle)):
 #print(checkvals)
 
 # #plots z and v on the same axis
+print(ts[::2*pointsperhalfcycle])
 plt.plot(ts,x[:,0])
 plt.plot(ts,x[:,1])
-plt.plot(ts[checkvals],x[:,0][checkvals],"bx")
+plt.plot(ts[::2*pointsperhalfcycle],x[:,0][::2*pointsperhalfcycle],"bx")
 
 #testing code
 # plt.plot(ts,np.sin(ts))
@@ -75,10 +76,10 @@ plt.ylabel("z")
 plt.show()
 
 #plots phase space
-plt.plot(x[:,0],x[:,1],"b",linewidth=0.5)
+#plt.plot(x[:,0],x[:,1],"b",linewidth=0.5)
 
 #plots poincare section
-plt.plot(x[:,0][checkvals],x[:,1][checkvals],"b.")
+plt.plot(x[:,0][::2*pointsperhalfcycle],x[:,1][::2*pointsperhalfcycle],"b.")
 
 plt.xlabel("z")
 plt.ylabel("v")
