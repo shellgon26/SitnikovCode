@@ -33,13 +33,16 @@ tmax=1000
 #defines how many points to plot per pi
 pointsperhalfcycle=100
 
+#Animates the phase space diagram
+Animated = True
+
 def odes(x,tval):
     #reads in initial values for ode
     z=x[0]
     v=x[1]
     A=x[2]
 
-    #calculates R via formula given in project outline
+    #calculates r via formula given in project outline
     r=0.5*(1-e*math.cos(A))
     
     #the ODEs given in the project outline
@@ -51,21 +54,15 @@ def odes(x,tval):
     result =[dz,dv,dA]
     return result
 
-
-
 #combines initial values into list to be given to odeint function
 x0=[z0,v0,A0]
 
 #creates a list of ts to evaluate the ODEs at
 ts=np.linspace(0,2*tmax*math.pi,2*tmax*pointsperhalfcycle+1)
 
-
-
 #gets the numerical solutions to the ODEs given the inital values
 #values at all the times within ts
 x=odeint(odes,x0,ts)
-
-
 
 checkvals = []
 for i in range(-1,2*pointsperhalfcycle*tmax,int(2*pointsperhalfcycle)):
@@ -80,18 +77,12 @@ if Plotzvtgraph:
     plt.plot(ts,x[:,1])
     plt.plot(ts[checkvals],x[:,0][checkvals],"bx")
 
-    #testing code
-    # plt.plot(ts,np.sin(ts))
-    # plt.plot(ts[checkvals],np.sin(ts)[checkvals],"bx")
-
     #plot labels
     plt.xlabel("time (s)")
     plt.ylabel("z")
 
     #display first plot
     plt.show()
-
-Animated = True
 
 if Plotphasespacegraph:
     
@@ -109,7 +100,6 @@ if Plotphasespacegraph:
             ax.clear()
     #plots the "full" phase space - the phase space for all the times calculated
     plt.plot(x[:,0],x[:,1],"b",linewidth=0.5)
-
 
 if Plotpoincaresection:
     #plots poincare section
