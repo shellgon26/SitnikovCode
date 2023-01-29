@@ -22,10 +22,10 @@ e=0.2
 Plotzvtgraph=False
 
 #if you want to see the phase space line, set this to true
-Plotphasespacegraph=False
+Plotphasespacegraph=True
 
 #if you want to see the Poincaré section points, set this to true
-Plotpoincaresection=True
+Plotpoincaresection=False
 
 #Please ensure tmax is an integer
 #tmx is the maximum time to calculate values for (divided by 2pi)
@@ -91,8 +91,20 @@ if Plotzvtgraph:
     #display first plot
     plt.show()
 
+Animated = True
+
 if Plotphasespacegraph:
     #plots phase space
+    if Animated:
+        fix,ax=plt.subplots()
+        for i in range(0,200):
+            #if you want to see all the points be animates change the 2000 to 'len(ts)-1' without the quotation marks
+            ax.plot(x[:,0][:i],x[:,1][:i],"b",linewidth=0.5)
+            plt.xlabel("z")
+            plt.ylabel("v")
+            plt.pause(0.001)
+            ax.clear()
+    
     plt.plot(x[:,0],x[:,1],"b",linewidth=0.5)
 
 
@@ -100,7 +112,7 @@ if Plotpoincaresection:
     #plots poincare section
     plt.plot(x[:,0][checkvals],x[:,1][checkvals],"b.")
 
-if Plotphasespacegraph | Plotpoincaresection:
+if (Plotphasespacegraph | Plotpoincaresection & ~Animated):
     plt.xlabel("z")
     plt.ylabel("v")
 
