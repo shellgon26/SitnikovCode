@@ -94,17 +94,20 @@ if Plotzvtgraph:
 Animated = True
 
 if Plotphasespacegraph:
-    #plots phase space
+    
+    #If the phase space is being animates, this code will run, which 
+    #replots the data and just adding another point
     if Animated:
         fix,ax=plt.subplots()
-        for i in range(0,200):
-            #if you want to see all the points be animates change the 2000 to 'len(ts)-1' without the quotation marks
+        for i in range(0,2000):
+            #if you want to see all the points be animates change the 
+            #2000 to 'len(ts)-1' without the quotation marks
             ax.plot(x[:,0][:i],x[:,1][:i],"b",linewidth=0.5)
             plt.xlabel("z")
             plt.ylabel("v")
             plt.pause(0.001)
             ax.clear()
-    
+    #plots the "full" phase space - the phase space for all the times calculated
     plt.plot(x[:,0],x[:,1],"b",linewidth=0.5)
 
 
