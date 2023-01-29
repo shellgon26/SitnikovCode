@@ -16,16 +16,16 @@ v0=1.915
 A0=0
 
 #defines the eccentricity of plane orbits
-e=0.2
+e=0.9
 
 #if you want to see how z and v vary with time, set this to true
 Plotzvtgraph=False
 
 #if you want to see the phase space line, set this to true
-Plotphasespacegraph=True
+Plotphasespacegraph=False
 
 #if you want to see the Poincaré section points, set this to true
-Plotpoincaresection=False
+Plotpoincaresection=True
 
 #Please ensure tmax is an integer
 #tmx is the maximum time to calculate values for (divided by 2pi)
@@ -105,7 +105,7 @@ if Plotpoincaresection:
     #plots poincare section
     plt.plot(x[:,0][checkvals],x[:,1][checkvals],"b.")
 
-if (Plotphasespacegraph | Plotpoincaresection & ~Animated):
+if ((Plotphasespacegraph& ~Animated) | Plotpoincaresection ):
     plt.xlabel("z")
     plt.ylabel("v")
 
