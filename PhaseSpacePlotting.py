@@ -19,7 +19,9 @@ A0=0
 e=0
 
 #if you want to see how z and v vary with time, set this to true
-Plotzvtgraph=False
+#If you want this graph, I reccomend setting tmax to a single digit number, else
+#the x axis becomes unreadable due to the results being squished together
+Plotzvtgraph=True
 
 #if you want to see the phase space line, set this to true
 Plotphasespacegraph=False
@@ -28,7 +30,7 @@ Plotpoincaresection=False
 
 #Please ensure tmax is an integer
 #tmx is the maximum time to calculate values for (divided by 2pi)
-tmax=100
+tmax=10
 #defines how many points to plot per pi
 pointsperhalfcycle=100
 
@@ -75,7 +77,6 @@ if Plotzvtgraph:
     # #plots z and v on the same axis
     plt.plot(ts,x[:,0],label="z")
     plt.plot(ts,x[:,1],label="v")
-    plt.plot(ts[checkvals],x[:,0][checkvals],"bx")
 
     #plot labels
     plt.xlabel("time (s)")
