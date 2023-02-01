@@ -7,19 +7,18 @@ import math
 
 
 #initial value for z
-z0=1
+z0=0
 
 #initial value for v
-v0=0.62
+v0=1
 
 #initial value for A
 A0=0
 
 #defines the eccentricity of plane orbits
-e=0.2
+e=0.9
 
-#Set to True if you would like the phase space and the Poincaré section to have the same scale
-ss=True
+
 
 #if you want to see how z and v vary with time, set this to true
 #If you want this graph, I reccomend setting tmax to a single digit number, else
@@ -27,13 +26,16 @@ ss=True
 Plotzvtgraph=False
 
 #if you want to see the phase space line, set this to true
-Plotphasespacegraph=True
+Plotphasespacegraph=False
 #if you want to see the Poincaré section points, set this to true
 Plotpoincaresection=True
 
+#Set to True if you would like the phase space and the Poincaré section to have the same scale
+ss=True
+
 #Please ensure tmax is an integer
 #tmx is the maximum time to calculate values for (divided by 2pi)
-tmax=100
+tmax=1000
 #defines how many points to plot per pi
 pointsperhalfcycle=100
 
