@@ -10,14 +10,13 @@ import math
 z0=0
 
 #initial value for v
-v0=1
+v0=0.5
 
 #initial value for A
 A0=0
 
 #defines the eccentricity of plane orbits
-e=0.9
-
+e=0.1
 
 
 #if you want to see how z and v vary with time, set this to true
@@ -71,7 +70,9 @@ ts=np.linspace(0,2*tmax*math.pi,2*tmax*pointsperhalfcycle+1)
 #values at all the times within ts
 x=odeint(odes,x0,ts)
 
+#initialises a list to store indexes of the points that are multiples of 2pi within
 checkvals = []
+#finds and stores all the 2pi indexes
 for i in range(-1,2*pointsperhalfcycle*tmax,int(2*pointsperhalfcycle)):
     if i == -1:
         checkvals.append(0)
@@ -85,6 +86,7 @@ if Plotzvtgraph:
 
     #plot labels
     plt.xlabel("time (s)")
+    #tells you which line is which
     plt.legend()
     #display first plot
     plt.show()
@@ -103,17 +105,24 @@ if Plotphasespacegraph:
             plt.ylabel("v")
             plt.pause(0.001)
             ax.clear()
-    #plots the "full" phase space - the phase space for all the times calculated
+    #titles the plot with the relevant variables and their values
     plt.title(f"e={e},z0={z0},v0={v0}, between 0 and {2*tmax}\u03C0")
+    #plots the "full" phase space - the phase space for all the times calculated
     plt.plot(x[:,0],x[:,1],"b",linewidth=0.5)
 
 if Plotpoincaresection:
     #plots poincare section
     if ss & ~Plotphasespacegraph:
+        #plots an invisible version of the pase space plot to keep the scales the same
         plt.plot(x[:,0],x[:,1],"w",linewidth=0.5)
+    #titles the graph with the relevant variables and their values
+    plt.title(f"Poincaré section with e={e},z0={z0},v0={v0}, between 0 and {2*tmax}\u03C0")
+    #plots all the points that are at a multiple of 2pi (in t)
     plt.plot(x[:,0][checkvals],x[:,1][checkvals],"b.")
 
+#adds labels and displays the plot if it doesn't already exist
 if ((Plotphasespacegraph& ~Animated) | Plotpoincaresection ):
+    #adds labels to the plot
     plt.xlabel("z")
     plt.ylabel("v")
 
