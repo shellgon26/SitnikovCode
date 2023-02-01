@@ -99,6 +99,7 @@ if Plotphasespacegraph:
             plt.pause(0.001)
             ax.clear()
     #plots the "full" phase space - the phase space for all the times calculated
+    plt.title(f"e={e},z0={z0},v0={v0}, between 0 and {2*tmax}\u03C0")
     plt.plot(x[:,0],x[:,1],"b",linewidth=0.5)
 
 if Plotpoincaresection:
