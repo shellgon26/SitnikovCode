@@ -7,16 +7,19 @@ import math
 
 
 #initial value for z
-z0=0
+z0=1
 
 #initial value for v
-v0=1
+v0=0.62
 
 #initial value for A
 A0=0
 
 #defines the eccentricity of plane orbits
-e=0
+e=0.2
+
+#Set to True if you would like the phase space and the Poincaré section to have the same scale
+ss=True
 
 #if you want to see how z and v vary with time, set this to true
 #If you want this graph, I reccomend setting tmax to a single digit number, else
@@ -24,19 +27,19 @@ e=0
 Plotzvtgraph=False
 
 #if you want to see the phase space line, set this to true
-Plotphasespacegraph=False
+Plotphasespacegraph=True
 #if you want to see the Poincaré section points, set this to true
-Plotpoincaresection=False
+Plotpoincaresection=True
 
 #Please ensure tmax is an integer
 #tmx is the maximum time to calculate values for (divided by 2pi)
-tmax=1000
+tmax=100
 #defines how many points to plot per pi
 pointsperhalfcycle=100
 
 #Animates the phase space diagram
 #NOTE: Do not try to close the graph while it is still animating, it will spawn a blank graph in its place, in this case you'll have to close your python to fix it
-Animated = True
+Animated = False
 
 def odes(x,tval):
     #reads in initial values for ode
@@ -104,6 +107,8 @@ if Plotphasespacegraph:
 
 if Plotpoincaresection:
     #plots poincare section
+    if ss & ~Plotphasespacegraph:
+        plt.plot(x[:,0],x[:,1],"w",linewidth=0.5)
     plt.plot(x[:,0][checkvals],x[:,1][checkvals],"b.")
 
 if ((Plotphasespacegraph& ~Animated) | Plotpoincaresection ):
