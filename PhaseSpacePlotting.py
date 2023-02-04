@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-def odes(x,tval):
+def odes(x,tval,e):
     #reads in initial values for ode
     z=x[0]
     v=x[1]
@@ -24,6 +24,8 @@ def odes(x,tval):
 
 def PlotWhatYouNeed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,ss:bool=True,Animated:bool=True,Plotzvtgraph:bool=False,Plotphasespacegraph:bool=False,Plotpoincaresection:bool=False):
 
+    A0=0
+
     #combines initial values into list to be given to odeint function
     x0=[z0,v0,A0]
 
@@ -32,7 +34,7 @@ def PlotWhatYouNeed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,ss
 
     #gets the numerical solutions to the ODEs given the inital values
     #values at all the times within ts
-    x=odeint(odes,x0,ts)
+    x=odeint(odes,x0,ts,args=(e,))
 
     #initialises a list to store indexes of the points that are multiples of 2pi within
     checkvals = []
@@ -60,7 +62,7 @@ def PlotWhatYouNeed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,ss
         #If the phase space is being animates, this code will run, which 
         #replots the data and just adding another point
         if Animated:
-            fix,ax=plt.subplots()
+            fig,ax=plt.subplots()
             for i in range(0,2000):
                 #if you want to see all the points be animates change the 
                 #2000 to 'len(ts)-1' without the quotation marks
