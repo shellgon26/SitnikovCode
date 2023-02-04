@@ -53,7 +53,7 @@ def Plotwhatyouneed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,Pl
 
     #gets the numerical solutions to the ODEs given the inital values
     #values at all the times within ts
-    x=odeint(odes,x0,ts)
+    x=odeint(odes,x0,ts,args=(e,))
 
     #initialises a list to store indexes of the points that are multiples of 2pi within
     checkvals = []
@@ -114,7 +114,7 @@ def Plotwhatyouneed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,Pl
         #display 2nd graph
         plt.show()
 
-def odes(x,tval):
+def odes(x,tval,e):
     #reads in initial values for ode
     z=x[0]
     v=x[1]
