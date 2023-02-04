@@ -5,14 +5,19 @@ import matplotlib.pyplot as plt
 import math
 #comment time BABY
 
+
 #initial value for z
-z0=0
+z0=0.88
 
 #initial value for v
-v0=0.5
+v0=0
+
+#initial value for A
+A0=0
 
 #defines the eccentricity of plane orbits
-e=0.1
+e=0.2
+
 
 #if you want to see how z and v vary with time, set this to true
 #If you want this graph, I reccomend setting tmax to a single digit number, else
@@ -24,27 +29,39 @@ Plotphasespacegraph=False
 #if you want to see the Poincaré section points, set this to true
 Plotpoincaresection=True
 
+#Set to True if you would like the phase space and the Poincaré section to have the same scale
+ss=True
+
 #Please ensure tmax is an integer
 #tmx is the maximum time to calculate values for (divided by 2pi)
 tmax=1000
-
 #defines how many points to plot per pi
 pointsperhalfcycle=100
-
-
-#Set to True if you would like the phase space and the Poincaré section to have the same scale
-ss=True
 
 #Animates the phase space diagram
 #NOTE: Do not try to close the graph while it is still animating, it will spawn a blank graph in its place, in this case you'll have to close your python to fix it
 Animated = False
 
+def odes(x,tval):
+    #reads in initial values for ode
+    z=x[0]
+    v=x[1]
+    A=x[2]
 
-def Plotwhatyouneed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,Plotzvstgraph:list=False,Plotphasespacegraph:bool=False,Plotpoincaresection:bool=False,Animated:bool=False,ss:bool=True):
-    print("hold")
+    #calculates r via formula given in project outline
+    r=0.5*(1-e*math.cos(A))
+    
+    #the ODEs given in the project outline
+    dz=2*r*v
+    dv=-(2*r*z/(z**2+r**2)**(3/2))
+    dA=1
 
-    #initial value for A (It changing doesn't matter so i'm not allowing it to be changed)
-    A0=0
+    #returns the result
+    result =[dz,dv,dA]
+    return result
+
+def PlotWhatYouNeed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,ss:bool=True,Animated:bool=True,Plotzvtgraph:bool=False,Plotphasespacegraph:bool=False,Plotpoincaresection:bool=False):
+
     #combines initial values into list to be given to odeint function
     x0=[z0,v0,A0]
 
@@ -114,22 +131,4 @@ def Plotwhatyouneed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,Pl
         #display 2nd graph
         plt.show()
 
-def odes(x,tval):
-    #reads in initial values for ode
-    z=x[0]
-    v=x[1]
-    A=x[2]
-
-    #calculates r via formula given in project outline
-    r=0.5*(1-e*math.cos(A))
-    
-    #the ODEs given in the project outline
-    dz=2*r*v
-    dv=-(2*r*z/(z**2+r**2)**(3/2))
-    dA=1
-
-    #returns the result
-    result =[dz,dv,dA]
-    return result
-
-Plotwhatyouneed(0.88,0,0.2,1000,1000,Plotpoincaresection=True)
+PlotWhatYouNeed(0.88,0,0.2,1000,1000,Plotpoincaresection=True)
