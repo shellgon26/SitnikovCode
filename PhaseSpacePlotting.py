@@ -3,44 +3,6 @@ from scipy.integrate import odeint
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-#comment time BABY
-
-
-#initial value for z
-z0=0.88
-
-#initial value for v
-v0=0
-
-#initial value for A
-A0=0
-
-#defines the eccentricity of plane orbits
-e=0.2
-
-
-#if you want to see how z and v vary with time, set this to true
-#If you want this graph, I reccomend setting tmax to a single digit number, else
-#the x axis becomes unreadable due to the results being squished together
-Plotzvtgraph=False
-
-#if you want to see the phase space line, set this to true
-Plotphasespacegraph=False
-#if you want to see the Poincaré section points, set this to true
-Plotpoincaresection=True
-
-#Set to True if you would like the phase space and the Poincaré section to have the same scale
-ss=True
-
-#Please ensure tmax is an integer
-#tmx is the maximum time to calculate values for (divided by 2pi)
-tmax=1000
-#defines how many points to plot per pi
-pointsperhalfcycle=100
-
-#Animates the phase space diagram
-#NOTE: Do not try to close the graph while it is still animating, it will spawn a blank graph in its place, in this case you'll have to close your python to fix it
-Animated = False
 
 def odes(x,tval):
     #reads in initial values for ode
