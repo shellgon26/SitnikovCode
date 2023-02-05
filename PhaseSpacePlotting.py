@@ -22,7 +22,7 @@ def odes(x,tval,e):
     result =[dz,dv,dA]
     return result
 
-def PlotWhatYouNeed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,ss:bool=True,Animated:bool=True,Plotzvtgraph:bool=False,Plotphasespacegraph:bool=False,Plotpoincaresection:bool=False):
+def PlotWhatYouNeed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,ss:bool=True,Animated:bool=False,Plotzvtgraph:bool=False,Plotphasespacegraph:bool=False,Plotpoincaresection:bool=False):
 
     A0=0
 
@@ -95,4 +95,5 @@ def PlotWhatYouNeed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,ss
         #display 2nd graph
         plt.show()
 
-PlotWhatYouNeed(0.88,0,0.2,1000,1000,Plotpoincaresection=True)
+for v in [0.16,0.56,0.62,0.69,0.74]:
+    PlotWhatYouNeed(0,v,0.2,1000,1000,Plotpoincaresection=True)
