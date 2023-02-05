@@ -6,13 +6,13 @@ import math
 #comment time BABY
 
 #initial value for z
-z0=0
+z0=0.69
 
 #initial value for v
-v0=0.5
+v0=0.69
 
 #defines the eccentricity of plane orbits
-e=0.1
+e=0.2
 
 #if you want to see how z and v vary with time, set this to true
 #If you want this graph, I reccomend setting tmax to a single digit number, else
