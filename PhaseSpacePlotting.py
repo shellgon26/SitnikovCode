@@ -6,11 +6,10 @@ import math
 #comment time BABY
 
 #initial value for z
-z0=0.69
+z0=0
 
 #initial value for v
-v0=0.69
-
+v0=0.6200941
 #defines the eccentricity of plane orbits
 e=0.2
 
@@ -75,7 +74,8 @@ checkvals = []
 #finds and stores all the 2pi indexes
 for i in range(-1,2*pointsperhalfcycle*tmax,int(2*pointsperhalfcycle)):
     if i == -1:
-        checkvals.append(0)
+        #checkvals.append(0)
+        H=1
     else:
         checkvals.append(i)
 
