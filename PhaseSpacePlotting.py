@@ -6,12 +6,12 @@ import math
 #comment time BABY
 
 #initial value for z
-z0=0
+z0=0.216
 
 #initial value for v
-v0=0.6200941
+v0=-1
 #defines the eccentricity of plane orbits
-e=0.2
+e=0.7
 
 #if you want to see how z and v vary with time, set this to true
 #If you want this graph, I reccomend setting tmax to a single digit number, else
@@ -19,7 +19,7 @@ e=0.2
 Plotzvtgraph=False
 
 #if you want to see the phase space line, set this to true
-Plotphasespacegraph=False
+Plotphasespacegraph=True
 #if you want to see the Poincaré section points, set this to true
 Plotpoincaresection=True
 
@@ -110,6 +110,8 @@ if Plotphasespacegraph:
     #plots the "full" phase space - the phase space for all the times calculated
     plt.plot(x[:,0],x[:,1],"b",linewidth=0.5)
 
+plt.show()
+
 if Plotpoincaresection:
     #plots poincare section
     if ss & ~Plotphasespacegraph:
@@ -128,4 +130,33 @@ if ((Plotphasespacegraph& ~Animated) | Plotpoincaresection ):
 
     #display 2nd graph
     plt.show()
+
+animated2=True
+taillen=5
+if animated2:
+    fig,ax=plt.subplots()
+    #for i in range(len(x[:,0])):
+    for i in range(600):
+        xvals=[]
+        #print(f"i={i}")
+        if i<taillen:
+            #print(f"{i}<{taillen}={i<taillen}")
+            for j in range(i+1):
+                xvals.append(0)
+                #print("0 added")
+            displayvals=np.arange(0,i+1,1)
+            #print(displayvals)
+        else:
+            for j in range(taillen):
+                xvals.append(0)
+            displayvals=np.arange(i-4,i+1,1)
+        plt.ylim(min(x[:,0])*1.1,max(x[:,0])*1.1)
+        ax.plot(0,x[:,0][i],"b.",ms="10")
+        ax.plot(xvals,x[:,0][displayvals],color="blue",alpha=0.8)
+        plt.pause(0.001)
+        if i%100==0:
+            print(i)
+        ax.clear()
+    plt.show()
+
 
