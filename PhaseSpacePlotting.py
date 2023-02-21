@@ -192,11 +192,20 @@ def PltBifurcationDiagram(varmin,varmax,tmax,pointsperhalfcycle,e,z0=0,v0=0):
 
 tmax=1000
 pointsperhalfcycle=100
-e=0.2
 varmin=0
 varmax=4
 
 #PltBifurcationDiagram(varmin,varmax,tmax,pointsperhalfcycle,e)
 
-for v in np.arange(1.244,1.251,0.001):
-    PlotWhatYouNeed(0.5,v,e,tmax,pointsperhalfcycle,Plotphasespacegraph=True)
+PlotWhatYouNeed(0,1.92,0.2,400,pointsperhalfcycle,Plotphasespacegraph=True)
+PlotWhatYouNeed(0,2,0.2,200,pointsperhalfcycle,Plotphasespacegraph=True)
+PlotWhatYouNeed(0.5,1.5,0.2,100,pointsperhalfcycle,Plotphasespacegraph=True)
+PlotWhatYouNeed(0.5,1.25,0.2,500,pointsperhalfcycle,Plotphasespacegraph=True)
+PlotWhatYouNeed(0.5,2,0.2,10,pointsperhalfcycle,Plotphasespacegraph=True)
+PlotWhatYouNeed(0.5,0.75,0.4,240,pointsperhalfcycle,Plotphasespacegraph=True)
+PlotWhatYouNeed(0.5,1,0.4,50,pointsperhalfcycle,Plotphasespacegraph=True)
+PlotWhatYouNeed(0,2.11,0.4,280,pointsperhalfcycle,Plotphasespacegraph=True)
+PlotWhatYouNeed(0,2.25,0.4,100,pointsperhalfcycle,Plotphasespacegraph=True)
+
+for z,v,e in [(0,1.5,0.2),(0,1.91,0.2),(0,1,0.2),(0.5,0,0.2),(0.5,1.24,0.2),(0.5,1,0.2),(0.5,0.5,0.4),(0.5,0.74,0.4),(0,1,0.4),(0,2.1,0.4),(0,2,0.4)]:
+    PlotWhatYouNeed(z,v,e,tmax,pointsperhalfcycle,Plotphasespacegraph=True)
