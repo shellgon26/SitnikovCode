@@ -160,9 +160,30 @@ def PltPoincareSection3D(z0,tmax,pointsperhalfcycle,e):
     plt.xlim(-vmax,vmax)
     plt.show()
 
-z0=0
+def PltBifurcationDiagram(varmin,varmax,tmax,pointsperhalfcycle,e,z0=0,v0=0):
+    xvals=np.arange(varmin,varmax,2e-2)
+    #print(evals)
+    for v in xvals:
+        [zs,vs,ts]=np.transpose(solveodes(z0,v,tmax,pointsperhalfcycle,e))
+        checkvals=findcheckvals(pointsperhalfcycle,tmax)
+        # xvar=[]
+        xvar=np.array([v for i in vs[checkvals]])
+        # # for i in vs[checkvals]:
+        # #     xvar.append(v)
+        # xvar=np.array(xvar)
+        plt.plot(xvar,zs[checkvals],"b.")
+    plt.ylim(-varmax,varmax)
+    plt.xlabel("v0")
+    plt.ylabel("z")
+    plt.show()
+
 tmax=1000
 pointsperhalfcycle=100
-e=0.2
+e=0.4
+varmin=0
+varmax=4
 
-PltPoincareSection3D(z0,tmax,pointsperhalfcycle,e)
+
+#PltPoincareSection3D(z0,tmax,pointsperhalfcycle,e)
+PltBifurcationDiagram(varmin,varmax,tmax,pointsperhalfcycle,e)
+#PlotWhatYouNeed()
