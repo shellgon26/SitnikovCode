@@ -10,7 +10,6 @@ def odes(x,tval,e):
     v=x[1]
     A=x[2]
 
-
     #calculates r via formula given in project outline
     r=0.5*(1-e*math.cos(A))
     
@@ -87,13 +86,16 @@ def PlotWhatYouNeed3D(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,
     checkvals=findcheckvals()
 
     if Plotzvtgraph:
+        #plot the z and v vs time graph
         Pltzvtgraph()
 
     if Plotphasespacegraph:
+        #plot the phase space graph
         pltphasespacegraph()
 
  
     if Plotpoincaresection:
+        #plot the Poincaré section
         PltPoincareSection(zs,vs,v0,checkvals,e,z0,v0,tmax)
 
     #adds labels and displays the plot if it doesn't already exist
@@ -112,12 +114,14 @@ def PltPoincareSection(zs,vs,checkvals,e,z0,v0,tmax,ss,Plotphasespacegraph,ax=No
     #titles the graph with the relevant variables and their values
     plt.title(f"Poincaré section with e={e},z0={z0},v0={v0}, between 0 and {2*tmax}\u03C0")
     #plots all the points that are at a multiple of 2pi (in t)
-    if ax!=None:
-        #print(ax)
-        if changevar!=None:
-            #print(changevar)
-            ax.plot(zs[checkvals],vs[checkvals],changevar,"b.")
+    if ax!=None & changevar!=None:
+        #plots the 3D poincare section - I wouldn't do it if i were you it's laggy and really hard to read
+        #also you'd have to change the axis cause i don't have the code written and commented out , if you still
+        #really want to do it, message me in the group chat and i'll make a version where you can
+        #but please, don't do it
+        ax.plot(zs[checkvals],vs[checkvals],changevar,"b.")
     else:
+        #if the function isn't called in a very specific way, this line will run and just plot it normally
         plt.plot(zs[checkvals],vs[checkvals],"b.")
 
 def DisplayPhaseSection(Plotphasespacegraph, Animated,Plotpoincaresection):
@@ -130,26 +134,33 @@ def DisplayPhaseSection(Plotphasespacegraph, Animated,Plotpoincaresection):
         #display 2nd graph
         plt.show()
 
-
+def PlotWhatYouNeed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,ss:bool=True,Animated:bool=False,Plotzvtgraph:bool=False,Plotphasespacegraph:bool=False,Plotpoincaresection:bool=False):
+    #this is the version of the function you should be using 99% of the time
+    #solves the odes
     [zs,vs]=solveodes()
+    #finds the values to plot for the poincaré section
     checkvals=findcheckvals()
 
     if Plotzvtgraph:
+        #plots the z and v vs t graph
         Pltzvtgraph()
 
     if Plotphasespacegraph:
+        #plots the phase space
         pltphasespacegraph()
 
     if Plotpoincaresection:
+        #plots the poincaré section
         PltPoincareSection()
 
+    #displays the axis if needed
     DisplayPhaseSection()
 
 def PltPoincareSection3D(z0,tmax,pointsperhalfcycle,e):
-
+    #this is a funcrtion that shoudl never really be called, please don't look here, it's messy because
+    #i have no reason to actually make it look good or work better
     fig=plt.figure()
     ax=plt.axes(projection='3d')
-    #changevar=v
     vmin=0.6199
     vmax=0.6203
     for v in np.arange(vmin,vmax,1e-5):
@@ -160,20 +171,23 @@ def PltPoincareSection3D(z0,tmax,pointsperhalfcycle,e):
     plt.show()
 
 def PltBifurcationDiagram(varmin,varmax,tmax,pointsperhalfcycle,e,z0=0,v0=0):
+    #gets a set of values for the varaible to change
     xvals=np.arange(varmin,varmax,2e-2)
-    #print(evals)
+    #plots the z values for each value of the variable to change by
     for v in xvals:
+        #solving the odes
         [zs,vs,ts]=np.transpose(solveodes(z0,v,tmax,pointsperhalfcycle,e))
+        #finding the values of the phase space to plot
         checkvals=findcheckvals(pointsperhalfcycle,tmax)
-        # xvar=[]
-        xvar=np.array([v for i in vs[checkvals]])
-        # # for i in vs[checkvals]:
-        # #     xvar.append(v)
-        # xvar=np.array(xvar)
+        #duplicates the current value of the chainging variable to match the size of the z values
+        xvar=np.array([v for i in zs[checkvals]])
+        #plots the set of data for that value of the chaning variable
         plt.plot(xvar,zs[checkvals],"b.")
+    #scales and labels the axis
     plt.ylim(-varmax,varmax)
     plt.xlabel("v0")
     plt.ylabel("z")
+    #shows the plot
     plt.show()
 
 tmax=1000
@@ -182,6 +196,4 @@ e=0.4
 varmin=0
 varmax=4
 
-#PltPoincareSection3D(z0,tmax,pointsperhalfcycle,e)
 PltBifurcationDiagram(varmin,varmax,tmax,pointsperhalfcycle,e)
-#PlotWhatYouNeed()
