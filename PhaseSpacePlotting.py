@@ -137,24 +137,24 @@ def DisplayPhaseSection(Plotphasespacegraph, Animated,Plotpoincaresection):
 def PlotWhatYouNeed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,ss:bool=True,Animated:bool=False,Plotzvtgraph:bool=False,Plotphasespacegraph:bool=False,Plotpoincaresection:bool=False):
     #this is the version of the function you should be using 99% of the time
     #solves the odes
-    [zs,vs]=solveodes()
+    [zs,vs,ts]=np.transpose(solveodes(z0,v0,tmax,pointsperhalfcycle,e))
     #finds the values to plot for the poincaré section
-    checkvals=findcheckvals()
+    checkvals=findcheckvals(pointsperhalfcycle,tmax)
 
     if Plotzvtgraph:
         #plots the z and v vs t graph
-        Pltzvtgraph()
+        Pltzvtgraph(ts,zs,vs)
 
     if Plotphasespacegraph:
         #plots the phase space
-        pltphasespacegraph()
+        pltphasespacegraph(zs,vs,e,z0,v0,tmax,Animated)
 
     if Plotpoincaresection:
         #plots the poincaré section
-        PltPoincareSection()
+        PltPoincareSection(zs,vs,checkvals,e,z0,v0,tmax,ss,Plotphasespacegraph)
 
     #displays the axis if needed
-    DisplayPhaseSection()
+    DisplayPhaseSection(Plotphasespacegraph,Animated,Plotpoincaresection)
 
 def PltPoincareSection3D(z0,tmax,pointsperhalfcycle,e):
     #this is a funcrtion that shoudl never really be called, please don't look here, it's messy because
@@ -192,8 +192,11 @@ def PltBifurcationDiagram(varmin,varmax,tmax,pointsperhalfcycle,e,z0=0,v0=0):
 
 tmax=1000
 pointsperhalfcycle=100
-e=0.4
+e=0.2
 varmin=0
 varmax=4
 
-PltBifurcationDiagram(varmin,varmax,tmax,pointsperhalfcycle,e)
+#PltBifurcationDiagram(varmin,varmax,tmax,pointsperhalfcycle,e)
+
+for v in np.arange(1.244,1.251,0.001):
+    PlotWhatYouNeed(0.5,v,e,tmax,pointsperhalfcycle,Plotphasespacegraph=True)
