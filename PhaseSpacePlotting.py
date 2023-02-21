@@ -10,6 +10,7 @@ def odes(x,tval,e):
     v=x[1]
     A=x[2]
 
+
     #calculates r via formula given in project outline
     r=0.5*(1-e*math.cos(A))
     
@@ -21,7 +22,6 @@ def odes(x,tval,e):
     #returns the result
     result =[dz,dv,dA]
     return result
-
 
 def solveodes(z0,v0,tmax,pointsperhalfcycle,e):
     A0=0
@@ -130,7 +130,6 @@ def DisplayPhaseSection(Plotphasespacegraph, Animated,Plotpoincaresection):
         #display 2nd graph
         plt.show()
 
-def PlotWhatYouNeed(z0:float,v0:float,e:float,tmax:int,pointsperhalfcycle:int,ss:bool=True,Animated:bool=False,Plotzvtgraph:bool=False,Plotphasespacegraph:bool=False,Plotpoincaresection:bool=False):
 
     [zs,vs]=solveodes()
     checkvals=findcheckvals()
@@ -182,7 +181,6 @@ pointsperhalfcycle=100
 e=0.4
 varmin=0
 varmax=4
-
 
 #PltPoincareSection3D(z0,tmax,pointsperhalfcycle,e)
 PltBifurcationDiagram(varmin,varmax,tmax,pointsperhalfcycle,e)
